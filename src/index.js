@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { Router, browserHistory } from 'react-router'; //hashHistory & memortHistory are other history objects
+// hashHistory & memortHistory are other history objects
+import { Router, browserHistory } from 'react-router';
 import reducers from './reducers';
 import routes from './routes';
-index promise from 'redux-promise';
+import promise from 'redux-promise';
 
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);

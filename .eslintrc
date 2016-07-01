@@ -1,13 +1,9 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
+    "extends": "airbnb",
+    "parserOptions":{
         "ecmaFeatures": {
-            "jsx": true
+            "experimentalObjectRestSpread": true
         }
-    },
-    "rules": {
-        "semi": 2
-    },
-    "extends": "eslint-config-airbnb"
+      }
+
 }
