@@ -1,15 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost, deletePost } from '../actions/index';
 import { Link } from 'react-router';
 
 class PostsShow extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   componentWillMount() {
     this.props.fetchPost(this.props.params.id);
   }
 
+  onSubmit(props) {
+    this.props.createPost(props)
+      .then(() =>{
+        // blog post has been created, navigate the users to the index
+        // We navigate by calling this.context.router.push with the
+        // new path to navigate to.
+        this.context.router.push('/');
+      })
+  }
+
   onDeleteClick() {
-    this.props.deletePost(this.props.params.id);
+    this.props.deletePost(this.props.params.id)
+      .then(() => { this.context.router.push('/');});
   }
 
   render() {
@@ -22,7 +37,7 @@ class PostsShow extends Component {
     return (
       <div>
         <Link to="/">Back to Index</Link>
-        <button className="btn btn-danger pull-xs-right" onClick={this.onDeleteClick()}>
+        <button className="btn btn-danger pull-xs-right" onClick={this.onDeleteClick.bind(this)}>
           Delete Post
         </button>
         <h3>{post.title}</h3>
